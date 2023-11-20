@@ -75,7 +75,7 @@ const CurrencyModal: React.FC<ICurrencyModalProps> = ({
           <Text>Select Currency</Text>
         </Pressable>
         <View style={styles.main}>
-          {listData?.length >= 10 && (
+          {listData?.length > 10 && (
             <View style={styles.searchBarContainer}>
               <Image
                 style={styles.searchIcon}
