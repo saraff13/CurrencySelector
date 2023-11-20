@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import HomeStyles from './styles';
 import CurrencyDropdown from '../../components/CurrencyDropdown/CurrencyDropdown';
 import CurrencyModal from '../../components/CurrencyModal/CurrencyModal';
 import {IRenderItemProps} from '../../components/CurrencyModal/CurrencyModal-interface';
+import {GlobalContext} from '../..';
 
 let apiData: any = {};
 let sourceCurrencyData: any = [];
@@ -25,8 +26,11 @@ const Home = () => {
     useState(false);
 
   const styles = HomeStyles();
+  const globalValue = useContext(GlobalContext);
+  const {showLoader} = globalValue;
 
   const fetchCurrencies = () => {
+    showLoader(true);
     fetch(
       'https://www.instarem.com/api/v1/public/currency/pair?source_currency=AUD,HKD,MYR,SGD,USD,EUR,INR,GBP,CAD',
     )
@@ -41,7 +45,8 @@ const Home = () => {
         apiData = res?.data;
         setSourceCurrency(sourceCurrencyData[0]);
       })
-      .catch(error => console.log('error => ', error));
+      .catch(error => console.log('error => ', error))
+      .finally(() => showLoader(false));
   };
 
   useEffect(() => {

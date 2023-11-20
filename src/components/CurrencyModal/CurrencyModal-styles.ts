@@ -9,6 +9,7 @@ const CurrencyModalStyles = () =>
     },
     modalContainer: {
       flex: 1,
+      paddingTop: Scaling.vs(16),
     },
     backIconContainer: {
       flex: 1,
